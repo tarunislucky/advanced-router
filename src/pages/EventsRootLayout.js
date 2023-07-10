@@ -1,12 +1,13 @@
 import { Fragment } from "react";
 import { Outlet } from "react-router-dom";
-import EventsNavigation from "../components/EventsNavigation";
 
 const EventsRootLayout = () => {
+
 	return (
 		<>
-			<EventsNavigation />
-			<Outlet />
+			<main>
+				<Outlet />
+			</main>
 		</>
 	)
 }
