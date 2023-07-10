@@ -1,21 +1,37 @@
-import { Fragment } from "react";
-import { Link } from "react-router-dom";
-const dummyEvents = [{ id: 1, message: "Event-1" }, { id: 2, message: "Event-2" }];
-const EventsPage = () => {
+import { useEffect, useState } from 'react';
+
+import EventsList from '../components/EventsList';
+
+function EventsPage() {
+	const [isLoading, setIsLoading] = useState(false);
+	const [fetchedEvents, setFetchedEvents] = useState();
+	const [error, setError] = useState();
+
+	useEffect(() => {
+		async function fetchEvents() {
+			setIsLoading(true);
+			const response = await fetch('http://localhost:8080/events');
+
+			if (!response.ok) {
+				setError('Fetching events failed.');
+			} else {
+				const resData = await response.json();
+				setFetchedEvents(resData.events);
+			}
+			setIsLoading(false);
+		}
+
+		fetchEvents();
+	}, []);
 	return (
 		<>
-			<ul>
-				{dummyEvents.map((event, i) => {
-					return (
-						<li>
-							<Link to={`${event.id}`} > {event.message} </Link>
-						</li>
-					)
-				})}
-			</ul>
-			<h1>EventsPage</h1>
+			<div style={{ textAlign: 'center' }}>
+				{isLoading && <p>Loading...</p>}
+				{error && <p>{error}</p>}
+			</div>
+			{!isLoading && fetchedEvents && <EventsList events={fetchedEvents} />}
 		</>
-	)
+	);
 }
 
 export default EventsPage;
