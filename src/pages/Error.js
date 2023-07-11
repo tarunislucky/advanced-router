@@ -1,6 +1,9 @@
+import PageContent from "../components/PageContent";
 const ErrorPage = () => {
 	return (
-		<p>Something went wrong.</p>
+		<PageContent title="An error occured">
+			<p>Something went wrong.</p>
+		</PageContent >
 	)
 }
 
