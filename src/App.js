@@ -34,9 +34,16 @@ function App() {
         path: "/", element: <RootLayout />, errorElement: <ErrorPage />, children: [
           { index: true, element: <HomePage /> },
           { path: "events", element: <EventsPage />, loader: eventsLoader },
-          { path: "events/:id", element: <EventDetailPage />, loader: eventLoader },
-          { path: "events/new", element: <NewEventPage /> },
-          { path: "events/:id/edit", element: <EditEventPage /> }
+          {
+            path: "events/:id",
+            id: "event-details",
+            loader: eventLoader,
+            children: [
+              { index: true, element: <EventDetailPage /> },
+              { path: "edit", element: <EditEventPage /> }
+            ]
+          },
+          { path: "events/new", element: <NewEventPage /> }
         ]
       },
     ]
