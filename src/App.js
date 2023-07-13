@@ -23,7 +23,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./pages/RootLayout";
 import HomePage from "./pages/HomePage";
 import EventsPage, { eventsLoader } from "./pages/EventsPage";
-import EventDetailPage, { loader as eventLoader } from "./pages/EventDetailPage";
+import EventDetailPage, { loader as eventLoader, action as deleteEventAction } from "./pages/EventDetailPage";
 import NewEventPage, { action as newEventAction } from "./pages/NewEventPage";
 import EditEventPage from "./pages/EditEventPage";
 import ErrorPage from "./pages/Error";
@@ -39,7 +39,7 @@ function App() {
             id: "event-details",
             loader: eventLoader,
             children: [
-              { index: true, element: <EventDetailPage /> },
+              { index: true, element: <EventDetailPage />, action: deleteEventAction },
               { path: "edit", element: <EditEventPage /> }
             ]
           },
