@@ -1,9 +1,10 @@
-import { Fragment } from "react";
+import PageContent from "../components/PageContent";
 const HomePage = () => {
 	return (
-		<>
-			<h1>HomePage</h1>
-		</>
+		<PageContent>
+			<h1>Welcome</h1>
+			<p>Browse our amazing events!</p>
+		</PageContent>
 	)
 }
 
